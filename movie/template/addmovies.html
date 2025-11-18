@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container mt-5 p-5 w-50 border border-2">
+<h1 style="text-align:center;" class="mt-5">Addmovies</h1>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Director</th>
+        <th>Year</th>
+        <th>Language</th>
+        <th>Description</th>
+
+    </tr>
+
+    <tr>
+        <td>{{i.title}}</td>
+         <td>{{i.Director}}</td>
+        <td>{{i.Year}}</td>
+
+    </tr>
+</table>
+</div>
+{% endblock %}

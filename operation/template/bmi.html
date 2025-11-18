@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 >Bmi</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+  <label class="form-label">weight</label>
+  <input type="number" class="form-control"  placeholder="" name="num1">
+</div>
+      <div class="mb-3">
+  <label class="form-label">height</label>
+  <input type="number" class="form-control"  placeholder="" name="num2">
+</div>
+    <button class="btn btn-outline-success" type="submit">bmi</button>
+</form>
+{% if result %}
+{% endblock %}

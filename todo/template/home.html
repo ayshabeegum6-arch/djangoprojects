@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<!--FORM1-->
+
+
+<div class="row container">
+    <div class="col-6">
+        <div class="container p-5 ">
+            <h3 style="text-align:center;" class="mt-5">Add Task</h3>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form1|crispy }}
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+
+<!--   FORM2 -->
+
+
+
+    <div class="col-6 border-start border-2" >
+        <div class="container p-5 ">
+            <h3 style="text-align:center;" class="mt-5">Task to be completed</h3>
+            <ul>
+                {% for i in Todo %}
+                    <li>Title:{{ i.title }}</li>
+                    <li>Description:{{ i.description }}</li>
+                <li>Due Date:{{i.due_date}}</li>
+                    <li>Created At:{{ i.created_at }}</li>
+
+                    <a class="btn btn-danger mt-5 mb-3" href="{% url 'edit' i.id %}">Edit</a>
+                    <a class="btn btn-danger mt-5 mb-3" href="{% url 'delete' i.id %}">Delete</a>
+
+                {% endfor %}
+            </ul>
+
+
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
