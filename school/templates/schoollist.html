@@ -1,0 +1,26 @@
+{% extends 'adminhome.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4 text-center">School List</h2>
+
+    {% if data %}
+        <ol class="list-group list-group-numbered">
+            {% for school in data %}
+                <li class="list-group-item">
+                    <a href="{% url 'schooldetail' school.id %}">
+                        {{ school.schoolname }}
+                    </a>
+
+                </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p class="text-danger">No schools added yet.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

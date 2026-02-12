@@ -1,0 +1,40 @@
+{% extends 'adminhome.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4 text-center">School Detail</h2>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>School Name</th>
+            <td>{{ data.schoolname }}</td>
+        </tr>
+
+        <tr>
+            <th>Principal Name</th>
+            <td>{{ data.principal }}</td>
+        </tr>
+
+        <tr>
+            <th>Place</th>
+            <td>{{ data.place }}</td>
+        </tr>
+    </table>
+    {% if user.is_authenticated %}
+    {% if user.is_superuser == False %}
+    <div>
+   {% if can_join == True %}
+    <a class="btn btn-light" href="{% url 'studentjoin' data.id %}">Join now</a>
+        {% endif %}
+
+        {% if is_student == True %}
+    <a class="btn btn-light" href="{% url 'studentjoin' data.id %}">Leave now</a>
+        {% endif %}
+
+    </div>
+    {% endif %}
+    {% endif %}
+
+</div>

@@ -1,22 +1,14 @@
 from django import forms
-from django.contrib.admindocs.views import user_has_model_view_permission
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from  django.contrib.auth.forms import UserCreationForm
+# class Addbookforms(forms.Form):
+    # title = forms.CharField()
+    # author= forms.CharField()
+    # price=forms.IntegerField()
+    # pages=forms.IntegerField()
+    # language=forms.CharField()
 
-class SignupForm(UserCreationForm):
-    class Meta:
-        model=User
-        fields=['username','password1','password2','email','first_name','last_name']
-
-
-
-#password confirmation
-#password encryption
-
-
-
-class LoginForm(forms.Form):
-    username=forms.CharField(max_length=20)
-    password=forms.CharField(max_length=20)
-
-
+from books.models import Book
+class Addbookforms(forms.ModelForm):  # defines the form  based on Book model
+    class Meta:   # inner class used to define structure of form
+        model=Book
+        fields="__all__"

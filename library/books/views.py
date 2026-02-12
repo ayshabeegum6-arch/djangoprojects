@@ -1,46 +1,95 @@
 from django.shortcuts import render,redirect
+from django.template.context_processors import request
 from django.views import View
-from users.forms import SignupForm,LoginForm
-from django.contrib.auth import authenticate,login,logout
-from django.contrib import messages
+from books.forms import Addbookforms
+from books.models import Book
 # Create your views here.
 
-class Register(View):
-    def get(self,request):
-        form_instance = SignupForm()
-        context = {'form': form_instance}
-        return render(request,'register.html',context)
-    def post(self,request):
-        form_instance = SignupForm(request.POST)
-        if form_instance.is_valid():
-            form_instance.save()
-            return render(request,'login.html')
+# def home(request):
+#     return render(request,'home.html')
+# def viewbooks(request):
+#     return render(request,'viewbooks.html')
+# def addbooks(request):
+#     return render(request,'addbooks.html')
 
-class Userlogin(View):
+class Home(View):
     def get(self,request):
-        form_instance=LoginForm()
+      return render(request,'home.html')
+
+
+class Viewbooks(View):
+    def get(self,request):
+        b=Book.objects.all()
+        context={'books':b}
+        return render(request,'viewbooks.html',context)
+
+
+class Addbooks(View):
+    def get(self,request):
+        form_instance=Addbookforms()
         context={'form':form_instance}
-        return render(request,'login.html',context)
+        return render(request,'addbooks.html',context)
+
+
 
     def post(self,request):
-        form_instance=LoginForm(request.POST)
+        form_instance = Addbookforms(request.POST,request.FILES)
         if form_instance.is_valid():
-            data=form_instance.cleaned_data   # fetches data after validation
-            u=data['username']            # retrieves username from cleaned data
-            p=data['password']            # retrieves password from cleaned data
-            user=authenticate(username=u,password=p)      # calls authenticate() to verify if user exist
-                                                          # if record exists then it returns user object
-                                                          # else none
-            if user:      # if user exists
-                login(request,user)        # adds the user into current session
-                return redirect('books:home')
+            # data = form_instance.cleaned_data
+            # print(data)
+            # title =data['title']
+            # author = data['author']
+            # price = data['price']
+            # pages = data['pages']
+            # language = data['language']
 
-            else:     # if user deos not exists
-                messages.error(request, "Invalid Credentials")
+            # b=Book.objects.create(title=title,author=author,price=price,page=pages,language=language)
+            # b.save()
+            form_instance.save()
+            context={'form':form_instance}
+            # context = {'t':title,'a':author,'p':price,'page':pages,'l':language}
+            return render(request, 'addbooks.html',context)
 
-                return redirect('users:userlogin')
+class Detail(View):
+    def get(self,request,i):
+        b=Book.objects.get(id=i)
+        context={'book':b}
 
-class Userlogout(View):
-    def get(self,request):
-        logout(request)  #remove the user from the session
-        return redirect('books:home')
+        return render(request,'detail.html',context)
+    def post(self,request):
+        pass
+
+
+class Edit(View):
+    def get(self,request,i):
+        b=Book.objects.get(id=i)
+        form_instance=Addbookforms(instance=b)
+        context={'form':form_instance}
+
+        return render(request,'edit.html',context)
+    def post(self,request,i):
+
+            b = Book.objects.get(id=i)
+
+            form_instance = Addbookforms(request.POST, request.FILES,instance=b)
+            if form_instance.is_valid():
+                form_instance.save()
+
+
+                return redirect('books:viewbooks')
+
+
+
+
+class Delete(View):
+        def get(self,request,i):
+              b=Book.objects.get(id=i)
+              b.delete()
+              return redirect('books:viewbooks')
+
+        def post(self, request):
+            pass
+
+
+
+

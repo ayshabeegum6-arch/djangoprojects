@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'studenthome.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2 class="mb-4 text-center">Enter Student Details</h2>
+
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-primary mt-3" type="submit">Join now</button>
+    </form>
+
+</div>
+{% endblock %}
