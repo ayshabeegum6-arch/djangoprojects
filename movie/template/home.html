@@ -1,66 +1,71 @@
-<!--{% extends 'base.html' %}-->
 
-<!--{% block content %}-->
-<!--{% load crispy_forms_tags %}-->
-<!--<div class="container mt-5 p-5 w-50 border border-2">-->
-<!--<h1 style="text-align:center;" class="mt-5">Addmovies</h1>-->
-<!--<table>-->
+{% extends 'base.html' %}
+
+{% block content %}
+<!--<h3 >Movie List</h3>-->
+<!--<div class="container w-70 p-3" >-->
+<!--<table class="table table-bordered">-->
 <!--    <tr>-->
-<!--        <th>Title</th>-->
+<!--       <th>Title</th>-->
 <!--        <th>Director</th>-->
 <!--        <th>Year</th>-->
 <!--        <th>Language</th>-->
+<!--        <th>Image</th>-->
 <!--        <th>Description</th>-->
-
 <!--    </tr>-->
-<!--    {% for i in movies%}-->
+<!--    {% for i in movie %}-->
 <!--    <tr>-->
-<!--        <td><img src="{{i.image."</td>-->
-<!--        <td>{{i.title}}</td>-->
-<!--         <td>{{i.Director}}</td>-->
-<!--        <td>{{i.Year}}</td>-->
 
-<!--    </tr>-->
+<!--    <td>{{i.title}}</td>-->
+<!--    <td>{{i.director}}</td>-->
+<!--        <td>{{i.year}}</td>-->
+<!--        <td>{{i.language}}</td>-->
+<!--        <td><img src="{{i.image.url}}"></td>-->
+<!--        <td>{{i.description}}</td>-->
+<!--</tr>-->
+<!--    {% endfor %}-->
 <!--</table>-->
-<!--</div>-->
-<!--{% endblock %}-->
+<!--    </div>-->
+
+
+
+
 
 
 <!--<ol>-->
-<!--    {% for i in movies%}-->
-<!--    <li>MovieDetails</li>-->
+<!--    {% for i in movie %}-->
+<!--    <li>Movie List</li>-->
 <!--    <ul>-->
 <!--        <li>Title:{{i.title}}</li>-->
-<!--        <li>Director:{{i.director}}</li>-->
-<!--        <li>Image:<img src="{{i.image.url}}"></li>-->
-<!--        <li>Year:{{i.year}}</li>-->
+<!--             <li>Director:{{i.director}}</li>-->
+<!--             <li>Year:{{i.year}}</li>-->
+<!--             <li>Language:{{i.language}}</li>-->
+<!--             <li>Image:<img src="{{i.image.url}}"></li>-->
+<!--             <li>Description:{{i.description}}</li>-->
 <!--    </ul>-->
 <!--    {% endfor %}-->
-
 <!--</ol>-->
-
+<div class="container mt-3">
 <div class="row">
-{% for i in movies %}
+{% for i in movie %}
     <div class="col">
-<div class="card" style="width: 15rem;">
-  <img src="{{i.image.url}}" class="card-img-top"height="300px" width="100%" alt="...">
+<div class="card" style="width: 18rem;">
+  <img src="{{i.image.url}}" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">{{i.tittle}}</h5>
-      <a href="{% url 'detail' i.id %}" class="btn btn-primary">Details</a>
+    <h5 class="card-title">{{i.title}}</h5>
 
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{i.director}}</li>
-    <li class="list-group-item">{{i.language}}</li>
-    <li class="list-group-item">{{i.year}}</li>
-      <li class="list-group-item">{{i.description}}</li>
+<!--  <ul class="list-group list-group-flush">-->
+<!--    <li class="list-group-item">{{i.director}}</li>-->
+<!--    <li class="list-group-item">{{i.year}}</li>-->
+<!--    <li class="list-group-item">{{i.language}}</li>-->
+<!--      <li class="list-group-item">{{i.description}}</li>-->
 
-
-
-  </ul>
-
+<!--  </ul>-->
+    <a href="{% url 'detail' i.id %}" class="btn btn-primary mb-3 mt-2 ">More Details</a>
 </div>
-   </div>
+</div>
 {% endfor %}
+    </div>
     </div>
 {% endblock %}

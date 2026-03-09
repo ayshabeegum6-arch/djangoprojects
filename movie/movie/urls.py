@@ -18,14 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from movieapp import views
 urlpatterns = [
-    path('', views.Home.as_view(), name="home"),
-    path('', views.Home.as_view(), name="home"),
-    path('addmovies', views.Addmovies.as_view(), name="addmovies"),
-    path('detail/<int:i>', views.DetailView.as_view(), name="detail"),
-    path('delete/<int:i>', views.DeleteView.as_view(), name="delete"),
+    # path('admin/', admin.site.urls),
+    path('',views.Home.as_view(),name="home"),
+    path('addmovie',views.Addmovie.as_view(),name="addmovie"),
+    path('detail/<int:i>',views.DetailView.as_view(),name="detail"),
+    path('delete/<int:i>',views.DeleteView.as_view(),name="delete"),
+path('update/<int:i>',views.UpdateView.as_view(),name="update"),
 ]
-
-
 from django.conf.urls.static import static
 from django.conf import settings
 

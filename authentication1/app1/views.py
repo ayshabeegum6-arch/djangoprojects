@@ -1,3 +1,4 @@
+
 from django.shortcuts import render,redirect
 from django.views import View
 from app1.forms import SignupForm,LoginForm
@@ -50,6 +51,3 @@ class Userlogout(View):
     def get(self,request):
         logout(request)  #remove the user from the session
         return redirect('home')
-
-
-
